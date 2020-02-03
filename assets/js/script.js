@@ -25,6 +25,15 @@ $.ajax({
     method: "GET"
   }).then(function(response) {
     console.log(response);
+    var results = response.data;
+     
+    for (var i = 0; i < results.length; i++){
+       var picture = $("<img>");
+       
+       picture.attr("src", results[i].images.fixed_height.url);
+       $("#gifyimages").append(picture);
+    }
+
   });
 
 
