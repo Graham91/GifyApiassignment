@@ -1,15 +1,16 @@
 
-console.log("jsconected")
+// console.log("jsconected")
 var animalarray = ["frog", "cow", "chicken", "pig", "dog", "horse"];
 var animalclassarray = [];
 function makeallthebuttons (){
     $("#animalbuttondiv").empty();
 for (var i = 0; i < animalarray.length; i++){
-    console.log(animalarray[i]);
+    // console.log(animalarray[i]);
     var animalButton = $("<button>").text(animalarray[i]);
-   $(animalButton).addClass("animalbut"+[i]);
+   $(animalButton).addClass("btn btn-dark");
+    $(animalButton).addClass("buttonpadding");
     $("#animalbuttondiv").append(animalButton);
-    animalclassarray.push(".animalbut"+i);
+    // animalclassarray.push(".animalbut"+i);
 };
 };
 
@@ -27,15 +28,16 @@ $("#submitbutton").on("click", function(){
 $("#animalbuttondiv").on("click", function(){
 var target = event.target;
 var buttonValue = target.innerHTML;
-console.log(buttonValue);
+// console.log(buttonValue);
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-buttonValue + "&api_key=2j8s4o2iK9wJORDeL51OwDqL4po4QZ15&limit=3";
+buttonValue + "&api_key=2j8s4o2iK9wJORDeL51OwDqL4po4QZ15&limit=10";
 $("#gifyimages").empty();
+console.log(queryURL);
 $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
     var results = response.data;
      
     for (var i = 0; i < results.length; i++){
@@ -49,22 +51,22 @@ $.ajax({
        timesclicked++;
        if (timesclicked>1){
         var target3 = event.target;
-        console.log(target3);
+        // console.log(target3);
         var classnamevar = "."+target3.className;
-        console.log(classnamevar);
+        // console.log(classnamevar);
         var classnumbergrab = classnamevar.substring(classnamevar.length - 1, classnamevar.length);
-        console.log(classnumbergrab);
+        // console.log(classnumbergrab);
         $(classnamevar).attr("src", results[classnumbergrab].images.fixed_height_still.url);
         timesclicked--;
         timesclicked--;
        }
        else{
            var target2 = event.target;
-           console.log(target2);
+        //    console.log(target2);
            var classnamevar = "."+target2.className;
-           console.log(classnamevar);
+        //    console.log(classnamevar);
            var classnumbergrab = classnamevar.substring(classnamevar.length - 1, classnamevar.length);
-           console.log(classnumbergrab);
+        //    console.log(classnumbergrab);
            $(classnamevar).attr("src", results[classnumbergrab].images.fixed_height.url);
 
        }

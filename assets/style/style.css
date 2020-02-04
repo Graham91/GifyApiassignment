@@ -1,0 +1,10 @@
+.buttonpadding{
+    padding-left: 10px;
+    margin: 10px;
+}
+.buttonpadding:empty{
+    display: none;  
+}
+#gifyimages img{
+    margin:10px;
+}
