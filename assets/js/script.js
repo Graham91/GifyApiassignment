@@ -18,8 +18,8 @@ makeallthebuttons();
 $("#submitbutton").on("click", function(){
     
     event.preventDefault();
-    var sinkhole = $("#textinfo").val();
-    animalarray.push(sinkhole);
+    var newbuttonname = $("#textinfo").val().trim();
+    animalarray.push(newbuttonname);
     $("#textinfo").val("");
     makeallthebuttons();
 });
@@ -29,7 +29,7 @@ var target = event.target;
 var buttonValue = target.innerHTML;
 console.log(buttonValue);
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-buttonValue + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=3";
+buttonValue + "&api_key=2j8s4o2iK9wJORDeL51OwDqL4po4QZ15&limit=3";
 $("#gifyimages").empty();
 $.ajax({
     url: queryURL,
@@ -40,10 +40,43 @@ $.ajax({
      
     for (var i = 0; i < results.length; i++){
        var picture = $("<img>");
-       
-       picture.attr("src", results[i].images.fixed_height.url);
+       picture.addClass("freefall"+i);
+       picture.attr("src", results[i].images.fixed_height_still.url);
        $("#gifyimages").append(picture);
     }
+    var timesclicked = 0
+    $("#gifyimages").on("click", function(){
+       timesclicked++;
+       if (timesclicked>1){
+        var target3 = event.target;
+        console.log(target3);
+        var classnamevar = "."+target3.className;
+        console.log(classnamevar);
+        var classnumbergrab = classnamevar.substring(classnamevar.length - 1, classnamevar.length);
+        console.log(classnumbergrab);
+        $(classnamevar).attr("src", results[classnumbergrab].images.fixed_height_still.url);
+        timesclicked--;
+        timesclicked--;
+       }
+       else{
+           var target2 = event.target;
+           console.log(target2);
+           var classnamevar = "."+target2.className;
+           console.log(classnamevar);
+           var classnumbergrab = classnamevar.substring(classnamevar.length - 1, classnamevar.length);
+           console.log(classnumbergrab);
+           $(classnamevar).attr("src", results[classnumbergrab].images.fixed_height.url);
+
+       }
+
+    
+    
+
+
+      
+    
+    });
+
 
   });
 
