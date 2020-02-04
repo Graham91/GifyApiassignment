@@ -2,24 +2,35 @@
 console.log("jsconected")
 var animalarray = ["frog", "cow", "chicken", "pig", "dog", "horse"];
 var animalclassarray = [];
+function makeallthebuttons (){
+    $("#animalbuttondiv").empty();
 for (var i = 0; i < animalarray.length; i++){
     console.log(animalarray[i]);
     var animalButton = $("<button>").text(animalarray[i]);
    $(animalButton).addClass("animalbut"+[i]);
     $("#animalbuttondiv").append(animalButton);
     animalclassarray.push(".animalbut"+i);
-    // var t = animalclassarray[i]
-    // $(t).on("click", function() {
-    //     console.log(animalarray);
-    //     });
+};
+};
 
-}
+makeallthebuttons();
+
+$("#submitbutton").on("click", function(){
+    
+    event.preventDefault();
+    var sinkhole = $("#textinfo").val();
+    animalarray.push(sinkhole);
+    $("#textinfo").val("");
+    makeallthebuttons();
+});
+
 $("#animalbuttondiv").on("click", function(){
 var target = event.target;
 var buttonValue = target.innerHTML;
 console.log(buttonValue);
 var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
 buttonValue + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=3";
+$("#gifyimages").empty();
 $.ajax({
     url: queryURL,
     method: "GET"
